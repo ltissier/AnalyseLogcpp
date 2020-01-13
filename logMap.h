@@ -36,9 +36,10 @@ public:
     //
     // Contrat :
     //
+    bool compare(const pair<int, int>&a, const pair<int, int>&b);
 
 
-//----------------------------------------s
+    void tenMostVisited();
 
 //-------------------------------------------- Constructeurs - destructeur
     logMap ( const logMap & unEnsemble );
@@ -67,6 +68,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
 typedef map<string,int> refererValue;
 typedef pair<refererValue,int> cibleViewers;
+typedef pair<refererValue,string> cibleViewersinv;
 //typedef pair<string,cibleViewers> cmap;
 
 map<string,cibleViewers> maplogs;
