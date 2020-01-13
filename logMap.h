@@ -9,9 +9,12 @@
 //---------- Interface de la classe <logMap> (fichier logMap.h) ----------------
 #if ! defined ( LOGMAP_H )
 #define LOGMAP_H
-
+using namespace std;
 #include <map>
 #include <string>
+#include <vector>
+
+#include <fstream>
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -34,12 +37,11 @@ public:
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
-    // Contrat :
+    // Contrat :input
     //
-    bool compare(const pair<int, int>&a, const pair<int, int>&b);
 
 
-    void tenMostVisited();
+//----------------------------------------s
 
 //-------------------------------------------- Constructeurs - destructeur
     logMap ( const logMap & unEnsemble );
@@ -48,11 +50,15 @@ public:
     // Contrat :
     //
 
-    logMap ( );
+    logMap (string nomFichier , char subdelim = ' ');
     // Mode d'emploi :
     //
     // Contrat :
     //
+	vector<string> tokenizeLine(string line);
+	
+	void top10();
+	
 
     virtual ~logMap ( );
     // Mode d'emploi :
@@ -68,10 +74,15 @@ protected:
 //----------------------------------------------------- Attributs protégés
 typedef map<string,int> refererValue;
 typedef pair<refererValue,int> cibleViewers;
-typedef pair<refererValue,string> cibleViewersinv;
 //typedef pair<string,cibleViewers> cmap;
 
 map<string,cibleViewers> maplogs;
+ifstream fichier;
+
+string nomfichier;
+char delim;
+
+
 
 };
 
