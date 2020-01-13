@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           logMap  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <logMap> (fichier logMap.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,14 +15,14 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "logMap.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type logMap::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
@@ -30,42 +30,38 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble & Ensemble::operator = ( const Ensemble & unEnsemble )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble ( const Ensemble & unEnsemble )
+logMap::logMap ( const logMap & unEnsemble )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <logMap>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de logMap (constructeur de copie)
 
 
-Ensemble::Ensemble ( )
+logMap::logMap ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <logMap>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de logMap
 
 
-Ensemble::~Ensemble ( )
+logMap::~logMap ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <logMap>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~logMap
 
 
 //------------------------------------------------------------------ PRIVE

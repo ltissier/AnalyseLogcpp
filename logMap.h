@@ -1,14 +1,17 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           logMap  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if ! defined ( ENSEMBLE_H )
-#define ENSEMBLE_H
+//---------- Interface de la classe <logMap> (fichier logMap.h) ----------------
+#if ! defined ( LOGMAP_H )
+#define LOGMAP_H
+
+#include <map>
+#include <string>
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,7 +20,7 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <logMap>
 //
 //
 //------------------------------------------------------------------------
@@ -35,28 +38,22 @@ public:
     //
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Ensemble & operator = ( const Ensemble & unEnsemble );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+//----------------------------------------s
 
 //-------------------------------------------- Constructeurs - destructeur
-    Ensemble ( const Ensemble & unEnsemble );
+    logMap ( const logMap & unEnsemble );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble ( );
+    logMap ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble ( );
+    virtual ~logMap ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,10 +65,15 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+typedef map<string,int> refererValue;
+typedef pair<refererValue,int> cibleViewers;
+//typedef pair<string,cibleViewers> cmap;
+
+map<string,cibleViewers> maplogs;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <logMap>
 
-#endif // ENSEMBLE_H
+#endif // LOGMAP_H
 
