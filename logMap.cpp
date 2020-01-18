@@ -16,7 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "logMap.h"
-#include <sstream>
+#include <iterator>
 
 //------------------------------------------------------------- Constantes
 
@@ -29,7 +29,27 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+bool logMap :: compare(const pair<int, int>&a, const pair<int, int>&b)
+{
+	return a.second<b.second;
+}
 
+void logMap :: tenMostVisited ()
+{
+	map<string,cibleViewers>::iterator iterateur;
+	multimap<int,string> top;
+	for (iterateur = maplogs.begin(); iterateur != maplogs.end(); ++iterateur)
+	{
+		top.insert(pair<int,string>(iterateur->second.second,iterateur->first));
+	}
+	multimap<int,string>::reverse_iterator revIt;
+	int cnt =0;
+	for(revIt = top.rbegin(); (cnt<10)&&(revIt!=top.rend()) ;++revIt,++cnt)
+	{
+		cout << revIt->second << endl;
+
+	}
+}
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -42,21 +62,20 @@ logMap::logMap ( const logMap & unEnsemble )
 #ifdef MAP
     cout << "Appel au constructeur de copie de <logMap>" << endl;
 #endif
+
+
 } //----- Fin de logMap (constructeur de copie)
 
 
-logMap::logMap (string nomFichier, char subdelim) : fichier(nomFichier.c_str())
+logMap::logMap ( )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <logMap>" << endl;
 #endif
-    nomfichier = nomFichier;
-
-    delim = subdelim;
-
 } //----- Fin de logMap
+
 
 
 logMap::~logMap ( )
@@ -67,37 +86,6 @@ logMap::~logMap ( )
     cout << "Appel au destructeur de <logMap>" << endl;
 #endif
 } //----- Fin de ~logMap
-
-vector<string> logMap::tokenizeLine(string line)
-{
-#ifdef MAP
-    cout << "Appel à <TokenizeLine> de <logMap>" << endl;
-#endif
-
-        vector<string> result;
-        stringstream ges(line);
-
-        string subtoken;
-        while (getline(ges, subtoken, delim)) {
-            result.push_back(subtoken);
-        }
-        return result;
-}
-void logMap::top10(){
-    cout << "test " << endl;
-    string line;
-
-    getline(fichier,line);
-
-        vector<string> tokenizedLine = tokenizeLine(line);
-        cout << tokenizedLine.at(6) << ' ';
-        cout << tokenizedLine.at(10) << ' ';
-        cout << endl;
-
-
-
-
-}
 
 
 //------------------------------------------------------------------ PRIVE
