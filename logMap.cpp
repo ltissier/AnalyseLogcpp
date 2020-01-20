@@ -59,7 +59,7 @@ void logMap::loadlogs(){
       string cible;
         string str = result[crawler.referrer];
         string delim("/");
-        
+
         std::size_t current, previous = 0;
     //    current = str.find(delim);
         previous = 8;
@@ -69,10 +69,16 @@ void logMap::loadlogs(){
         previous = current;
 
         if(previous<str.size()){
-          if(strcmp((str.substr(str.length()-1,1)).c_str(),"/")==0){
-            ref=str.substr(previous,(str.length()-previous)-2);
+
+          if(strcmp((str.substr(str.length()-2,1)).c_str(),"/")==0){
+
+              ref=str.substr(previous,(str.length()-previous)-2);
+
           }else{
               ref=str.substr(previous,(str.length()-previous)-1);
+          }
+          if(strcmp(ref.c_str(),"")==0){
+            ref = "-";
           }
         }else{
             ref = "-";
@@ -119,8 +125,8 @@ void logMap::loadlogs_timeexclusion(){
 
 
 void logMap::insert(string cible, string referrer){
-  cout << "cible : " << cible << endl;
-  cout << "referrer : "<< referrer << endl;
+//  cout << "cible : " << cible << endl;
+//  cout << "referrer : "<< referrer << endl;
   map<string,cibleViewers>::iterator it;
   it = maplogs.find(cible);
   if (it != maplogs.end()){
@@ -165,7 +171,7 @@ void logMap :: tenMostVisited ()
     int cnt =0;
     for(revIt = top.rbegin(); (cnt<10)&&(revIt!=top.rend()) ;++revIt,++cnt)
     {
-        cout << revIt->second << endl;
+        cout << revIt->second << "      "<< to_string(revIt->first)<< "hits"<< endl;
     }
 }
 void logMap:: generateGraph (string nom) // ligne à taper dans le terminal : dot -Tps testGraph.dot -o hw.ps
@@ -207,7 +213,7 @@ void logMap:: generateGraph (string nom) // ligne à taper dans le terminal : do
         for (j=1,iterateur2 = iterateur1->second.first.begin(); iterateur2 != iterateur1->second.first.end(); ++iterateur2, ++j)
         {
             string nb2= to_string(j);
-            string nb21 = {nb+nb2};
+            string nb21 = {nb+"a"+nb2};
             string numSousNoeud = {entete+nb21};
             string aStocker2 = {iterateur2->first};
             existe = dejaCree.find(aStocker2);

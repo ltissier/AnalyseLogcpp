@@ -62,11 +62,11 @@ logreader::~logreader ( )
 
 
   vector<string> logreader::next(){
-    cout << "parsing line " << endl;
+    //cout << "parsing line " << endl;
     vector<string> result;
           string line;
           getline(fichier,line);
-          cout << line << endl;
+      //    cout << line << endl;
 
           stringstream ges(line);
 
@@ -74,8 +74,8 @@ logreader::~logreader ( )
           while (getline(ges, subtoken, delim)) {
               result.push_back(subtoken);
           }
-          
-          cout << result.size() << endl;
+
+      //    cout << result.size() << endl;
           return result;
 
 
