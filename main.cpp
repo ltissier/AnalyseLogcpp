@@ -6,7 +6,6 @@
 int main(int argc, char const *argv[])
 {
 
-
         string nomfichier;
         int graph = 0;
         int graphName = 0;
@@ -68,11 +67,8 @@ int main(int argc, char const *argv[])
                 }else{
                   cout << "erreur dans le format d'heure de tri" << endl;
                 }
-
             }
-
           }
-
         }
 
           string nomfichierlog(argv[argc-1]);
@@ -100,6 +96,7 @@ int main(int argc, char const *argv[])
           if ((triHeure == 1) && (heure != -1))
           {
             //Méthode de chargement avec exclusion et tri de l'heure
+            selectedLogs.loadlogs_timeexclusion(heure);
             if ((graph==1)&& (graphName == 1))
             {
               selectedLogs.generateGraph(nomfichier);
@@ -109,6 +106,7 @@ int main(int argc, char const *argv[])
           else
           {
             //Méthode de chargement avec exclusion seule
+            selectedLogs.loadlogs_exclusion();
             if ((graph==1)&& (graphName == 1))
             {
               selectedLogs.generateGraph(nomfichier);
@@ -120,6 +118,7 @@ int main(int argc, char const *argv[])
           if ((triHeure == 1) && (heure != -1))
           {
             //Méthode de chargement avec exclusion de l'heure uniquement
+            selectedLogs.loadlogs_time(heure);
             if ((graph==1)&& (graphName == 1))
             {
               selectedLogs.generateGraph(nomfichier);

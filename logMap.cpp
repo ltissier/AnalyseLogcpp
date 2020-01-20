@@ -50,75 +50,133 @@ logMap::logMap (string nomFichier, char subdelim) : crawler(nomFichier,subdelim)
 
 
 } //----- Fin de logMap
+string logMap::normalizeRef(string ref){
+  ref = filterrequest(ref);
+  string delim("/");
+  std::size_t current, previous = 0;
+  previous = 8;
+  current = ref.find(delim, previous);
+  previous = current;
+  if(previous<ref.size()){
+
+    if(strcmp((ref.substr(ref.length()-2,1)).c_str(),"/")==0){
+        ref=ref.substr(previous,(ref.length()-previous)-2);
+
+    }else{
+        ref=ref.substr(previous,(ref.length()-previous)-1);
+    }
+    if(strcmp(ref.c_str(),"")==0){
+      ref = "-";
+    }
+  }else{
+      ref = "-";
+  }
+      transform(ref.begin(), ref.end(), ref.begin(), ::tolower);
+  return ref;
+}
+
+string logMap::normalizeCible(string cible){
+  cible = filterrequest(cible);
+
+  if(strcmp((cible.substr(cible.length()-1,1)).c_str(),"/")==0){
+    cible=cible.substr(0,cible.length()-1);
+  }
+  transform(cible.begin(), cible.end(), cible.begin(), ::tolower);
+  return cible;
+}
+
+string logMap::filterrequest(string adress){
+  string delim("?");
+  std::size_t current = 0;
+  current = adress.find(delim);
+    return adress.substr(0,current);
+
+
+
+}
+
 void logMap::loadlogs(){
   cout << "loading logs" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
-      string ref;
-      string cible;
-        string str = result[crawler.referrer];
-        string delim("/");
+      string ref(normalizeRef(result[crawler.referrer]));
+      string cible(normalizeCible(result[crawler.cible]));
 
-        std::size_t current, previous = 0;
-    //    current = str.find(delim);
-        previous = 8;
-      //  current = str.find(delim, previous);
-      //  previous = current + 1;
-        current = str.find(delim, previous);
-        previous = current;
-
-        if(previous<str.size()){
-
-          if(strcmp((str.substr(str.length()-2,1)).c_str(),"/")==0){
-
-              ref=str.substr(previous,(str.length()-previous)-2);
-
-          }else{
-              ref=str.substr(previous,(str.length()-previous)-1);
-          }
-          if(strcmp(ref.c_str(),"")==0){
-            ref = "-";
-          }
-        }else{
-            ref = "-";
-        }
-
-        str = result[crawler.cible];
-
-        if(strcmp((str.substr(str.length()-1,1)).c_str(),"/")==0){
-          cible=str.substr(0,str.length()-1);
-        }else{
-          cible = str;
-        }
-        insert(cible,ref);
+      insert(cible,ref);
     }
 }
-void logMap::loadlogs_time(){
-  cout << "loading logs" << endl;
+void logMap::loadlogs_time(int time){
+  cout << "loading logs with time filter" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
-        insert(result[crawler.cible],result[crawler.referrer]);
+
+      if(stoi(result[3].substr(13,2))==time){
+        string ref(normalizeRef(result[crawler.referrer]));
+        string cible(normalizeCible(result[crawler.cible]));
+        insert(cible,ref);
+      }
+
     }
 }
 void logMap::loadlogs_exclusion(){
-  cout << "loading logs" << endl;
+  cout << "loading logs excluding images, css or javascript files" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
+        string cible(normalizeCible(result[crawler.cible]));
+        string delim(".");
+        std::size_t current = 0;
+        current = cible.find(delim);
+        if(current<cible.size()){
+          string extension(cible.substr(current+1));
+          string extensions[] = {"css","js","jpg","png","gif","ico"};
+          int found = 0;
+          for(const string &ext : extensions){
+            if(strcmp(ext.c_str(),extension.c_str())==0){
+              found =1;
+              break;
+            }
+          }
+          if(found!=1){
+                  string ref(normalizeRef(result[crawler.referrer]));
+                insert(cible,ref);
 
-        insert(result[crawler.cible],result[crawler.referrer]);
-        cout << "insetted"<<endl;
+
+          }
+        }
+
     }
 }
-void logMap::loadlogs_timeexclusion(){
-  cout << "loading logs" << endl;
+void logMap::loadlogs_timeexclusion(int time){
+  cout << "loading logs excluding images, css or javascript files and filtering on time" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
-        insert(result[crawler.cible],result[crawler.referrer]);
-        cout << "insetted"<<endl;
+          if(stoi(result[3].substr(13,2))==time){
+            string cible(normalizeCible(result[crawler.cible]));
+            string delim(".");
+            std::size_t current = 0;
+            current = cible.find(delim);
+            if(current<cible.size()){
+              string extension(cible.substr(current+1));
+              string extensions[] = {"css","js","jpg","png","gif","ico"};
+              int found = 0;
+              for(const string &ext : extensions){
+                if(strcmp(ext.c_str(),extension.c_str())==0){
+                  found =1;
+                  break;
+                }
+              }
+              if(found!=1){
+                      string ref(normalizeRef(result[crawler.referrer]));
+                    insert(cible,ref);
+
+
+              }
+            }
+    }
     }
 }
 

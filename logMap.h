@@ -50,7 +50,9 @@ public:
     //
     // Contrat :
     //
-
+    string filterrequest(string adress);
+    string normalizeRef(string ref);
+    string normalizeCible(string cible);
     void insert(string referrer, string cible);
     bool compare(const pair<int, int>&a, const pair<int, int>&b);
 
@@ -64,9 +66,9 @@ public:
     void generateGraph(string nom);
 
     void loadlogs();
-    void loadlogs_time();
+    void loadlogs_time(int time);
     void loadlogs_exclusion();
-    void loadlogs_timeexclusion();
+    void loadlogs_timeexclusion(int time);
 
     logMap();
 
