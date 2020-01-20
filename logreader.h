@@ -7,15 +7,13 @@
 *************************************************************************/
 
 //---------- Interface de la classe <logMap> (fichier logMap.h) ----------------
-#if ! defined ( LOGMAP_H )
-#define LOGMAP_H
+#if ! defined ( LOGREADER_H )
+#define LOGREADER_H
 using namespace std;
 #include <map>
 #include <string>
 #include <vector>
-
 #include <fstream>
-#include "logreader.h"
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -29,69 +27,43 @@ using namespace std;
 //
 //------------------------------------------------------------------------
 
-class logMap
+class logreader
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :input
-    //
 
-
-//----------------------------------------s
-
-//-------------------------------------------- Constructeurs - destructeur
-    logMap ( const logMap & unEnsemble );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    void insert(string referrer, string cible);
-    bool compare(const pair<int, int>&a, const pair<int, int>&b);
-
-    logMap (string nomFichier , char subdelim = ' ');
+    logreader(string nomFichier , char subdelim = ' ');
     // Mode d'emploi :
     //
     // Contrat :
     //
-    void tenMostVisited ();
 
-    void generateGraph(string nom);
-
-    void loadlogs();
-    void loadlogs_time();
-    void loadlogs_exclusion();
-    void loadlogs_timeexclusion();
-
-    logMap();
+    vector<string> next();
 
 
-    virtual ~logMap ( );
+    virtual ~logreader ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
+
+    enum Indice { IP = 0, dateheure = 1 , fuseauhoraire = 2, typederequete = 3, cible = 6, protocole = 7, referrer = 10, agent = 11};
+    ifstream fichier;
+
+    string nomfichier;
+    char delim;
 
 //------------------------------------------------------------------ PRIVE
-typedef map<string,int> refererValue;
-typedef pair<refererValue,int> cibleViewers;
+
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
 
-//typedef pair<string,cibleViewers> cmap;
 
-map<string,cibleViewers> maplogs;
-ifstream fichier;
-logreader crawler;
-string nomfichier;
-char delim;
+
 
 
 
