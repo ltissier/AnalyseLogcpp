@@ -103,7 +103,7 @@ void logMap :: tenMostVisited ()
     int cnt =0;
     for(revIt = top.rbegin(); (cnt<10)&&(revIt!=top.rend()) ;++revIt,++cnt)
     {
-        cout << revIt->second << endl;
+        cout << to_string(cnt+1)<<")  "<<revIt->second << endl;
     }
 }
 
