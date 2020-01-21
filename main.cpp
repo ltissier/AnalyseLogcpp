@@ -5,7 +5,7 @@
 #include "logMap.h"
 int main(int argc, char const *argv[])
 {
-
+        //
         string nomfichier;
         int graph = 0;
         int graphName = 0;

@@ -1,0 +1,22 @@
+digraph{node1 [label="/favicon.ico"];
+node1a1 [label="-"];
+node1a1 -> node1 [label="1"];node2 [label="/sitewebif/intranet-etudiant.php"];
+node1a1 -> node2 [label="3"];node3 [label="/temps"];
+node3a1 [label="/ur"];
+node3a1 -> node3 [label="1"];node4 [label="/temps/3if37.html"];
+node3 -> node4 [label="1"];node5 [label="/temps/3if38.html"];
+node4 -> node5 [label="2"];node6 [label="/temps/3if39.html"];
+node5 -> node6 [label="1"];node7 [label="/temps/4if16.html"];
+node7a1 [label="/temps/4if15.html"];
+node7a1 -> node7 [label="1"];node8 [label="/temps/4if17.html"];
+node7 -> node8 [label="1"];node9 [label="/temps/4if18.html"];
+node8 -> node9 [label="1"];node10 [label="/temps/4if19.html"];
+node9 -> node10 [label="1"];node11 [label="/temps/4if20.html"];
+node10 -> node11 [label="1"];node12 [label="/temps/choix.gif"];
+node4 -> node12 [label="1"];node13 [label="/temps/fondinsa.jpg"];
+node13a1 [label="/temps/style_emploi_du_temps.css"];
+node13a1 -> node13 [label="1"];node14 [label="/temps/insaif.ico"];
+node1a1 -> node14 [label="1"];node15 [label="/temps/precedent.gif"];
+node4 -> node15 [label="1"];node3 -> node13a1 [label="1"];node17 [label="/temps/suivant.gif"];
+node4 -> node17 [label="1"];}
+

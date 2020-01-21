@@ -293,7 +293,7 @@ void logMap:: generateGraph (string nom) // ligne à taper dans le terminal : do
 
     fichier << "}";
   fichier.close();
-//  system("dot -Tpng testGraph.dot -o hw.ps");
+  //system({"dot -Tpng Test22.dot -o Test22.png"});
   cout<< "Graph créé avec succès" << endl;
 }
 
