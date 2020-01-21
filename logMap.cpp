@@ -52,6 +52,7 @@ logMap::logMap (string nomFichier, char subdelim) : crawler(nomFichier,subdelim)
 } //----- Fin de logMap
 string logMap::normalizeRef(string ref){
   ref = filterrequest(ref);
+
   string delim("/");
   std::size_t current, previous = 0;
   previous = 8;
@@ -60,14 +61,16 @@ string logMap::normalizeRef(string ref){
   if(previous<ref.size()){
 
     if(strcmp((ref.substr(ref.length()-2,1)).c_str(),"/")==0){
-        ref=ref.substr(previous,(ref.length()-previous)-2);
-
+        if(((ref.length()-previous)-2)>0){
+          ref=ref.substr(previous,(ref.length()-previous)-2);
+        }else{
+          ref = "/";
+        }
     }else{
         ref=ref.substr(previous,(ref.length()-previous)-1);
+
     }
-    if(strcmp(ref.c_str(),"")==0){
-      ref = "-";
-    }
+
   }else{
       ref = "-";
   }
