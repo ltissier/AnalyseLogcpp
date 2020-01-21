@@ -3,6 +3,7 @@
 #include <cstring>
 #include <string>
 #include "logMap.h"
+#include <ctype.h>
 int main(int argc, char const *argv[])
 {
         //
@@ -32,10 +33,10 @@ int main(int argc, char const *argv[])
               if(strcmp(str.substr(previous, current - previous).c_str(),"dot")==0){
                 graphName = 1;
                 nomfichier = str;
-                cout << "nom de fichier : " << nomfichier << endl;
+                //cout << "Nom de fichier : " << nomfichier << endl;
                 continue;
               }else{
-                cout << "erreur dans le format du fichier dot" << endl;
+                cerr << "Erreur dans le format du fichier dot" << endl;
                 continue;
               }
             }
@@ -46,7 +47,7 @@ int main(int argc, char const *argv[])
           if(excl==0){
             if(strcmp(argv[i],"-e")==0){
                 excl = 1;
-                  cout << "vous avez choisi d'exclure les documents de type image, css ou javascript " << endl;
+                  cout << "Vous avez choisi d'exclure les documents de type image, css ou javascript " << endl;
                 continue;
             }
           }
@@ -59,13 +60,18 @@ int main(int argc, char const *argv[])
             }
           }else{
             if(heure == -1){
+                if (isdigit(argv[i][0])==0)
+                {
+                  cerr<< "Veuillez rentrer une heure" << endl;
+                  return 0;
+                }
                 int h = stoi(argv[i]);
                 if(h>=0 && h<=23){
                     heure = h;
-                    cout << "vous avez choisi de ne prendre en compte que les logs dans l'heure " << heure << endl;
+                    cout << "Vous avez choisi de ne prendre en compte que les logs dans l'heure " << heure << endl;
                     continue;
                 }else{
-                  cout << "erreur dans le format d'heure de tri" << endl;
+                  cerr << "Erreur dans le format d'heure de tri" << endl;
                 }
             }
           }
@@ -78,13 +84,13 @@ int main(int argc, char const *argv[])
         previous = current + 1;
         current = nomfichierlog.find(delim, previous);
         if(strcmp(nomfichierlog.substr(previous, current - previous).c_str(),"log")!=0){
-            cout << "fatal error dans le nom de fichier log"<< endl;
+            cout << "Fatal error dans le nom de fichier log"<< endl;
             return 0;
         }
 
         if((graph==1)&&(graphName==0||(triHeure==1&&heure==-1))){
-            cout << "erreur critique dans le lancement du programme " << endl;
-            cout << "veuillez relancer le programme en corrigeant les parametres" << endl;
+            cerr << "Erreur critique dans le lancement du programme " << endl;
+            cout << "Veuillez relancer le programme en corrigeant les parametres" << endl;
             return 0;
         }
         cout << argv[argc-1] << endl;

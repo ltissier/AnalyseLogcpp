@@ -99,7 +99,7 @@ string logMap::filterrequest(string adress){
 }
 
 void logMap::loadlogs(){
-  cout << "loading logs" << endl;
+  cout << "Loading logs" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
@@ -110,7 +110,7 @@ void logMap::loadlogs(){
     }
 }
 void logMap::loadlogs_time(int time){
-  cout << "loading logs with time filter" << endl;
+  cout << "Loading logs with time filter" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
@@ -124,7 +124,7 @@ void logMap::loadlogs_time(int time){
     }
 }
 void logMap::loadlogs_exclusion(){
-  cout << "loading logs excluding images, css or javascript files" << endl;
+  cout << "Loading logs excluding images, css or javascript files" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){
@@ -153,7 +153,7 @@ void logMap::loadlogs_exclusion(){
     }
 }
 void logMap::loadlogs_timeexclusion(int time){
-  cout << "loading logs excluding images, css or javascript files and filtering on time" << endl;
+  cout << "Loading logs excluding images, css or javascript files and filtering on time" << endl;
     vector<string> result;
 
     while((result=crawler.next()).size()>0){

@@ -1,7 +1,8 @@
 digraph{node1 [label="/favicon.ico"];
 node1a1 [label="-"];
 node1a1 -> node1 [label="1"];node2 [label="/sitewebif/intranet-etudiant.php"];
-node1a1 -> node2 [label="3"];node3 [label="/temps"];
+node1a1 -> node2 [label="2"];node2a2 [label="/"];
+node2a2 -> node2 [label="1"];node3 [label="/temps"];
 node3a1 [label="/ur"];
 node3a1 -> node3 [label="1"];node4 [label="/temps/3if37.html"];
 node3 -> node4 [label="1"];node5 [label="/temps/3if38.html"];
@@ -19,4 +20,3 @@ node13a1 -> node13 [label="1"];node14 [label="/temps/insaif.ico"];
 node1a1 -> node14 [label="1"];node15 [label="/temps/precedent.gif"];
 node4 -> node15 [label="1"];node3 -> node13a1 [label="1"];node17 [label="/temps/suivant.gif"];
 node4 -> node17 [label="1"];}
-
